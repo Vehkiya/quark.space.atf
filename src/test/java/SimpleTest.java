@@ -5,25 +5,23 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import webdriver.DriverFactory;
+import webdriver.BrowserFactory;
 import webdriver.configuration.DriverConfig;
 
-import static webdriver.fixtures.Browser.CHROME;
-import static webdriver.fixtures.Browser.FIREFOX;
+import static webdriver.fixtures.BrowserName.FIREFOX;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {DriverConfig.class})
 public class SimpleTest {
 
     @Autowired
-    private DriverFactory factory;
+    private BrowserFactory factory;
 
     @Test
     public void verifyShit() throws ATFException {
 
         WebDriver webDriver = factory.getDriverForBrowser(FIREFOX);
 
-        webDriver.get("https://fentury.com/user_login");
-        System.out.println();
+        webDriver.get("https://fentury.com/users/sign_in");
     }
 }

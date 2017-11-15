@@ -7,7 +7,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-public enum Browser {
+import java.util.Arrays;
+
+public enum BrowserName {
     CHROME(ChromeDriver.class),
     FIREFOX(FirefoxDriver.class),
     IE(InternetExplorerDriver.class),
@@ -16,11 +18,15 @@ public enum Browser {
 
     Class<? extends WebDriver> driverClass;
 
-    Browser(Class<? extends WebDriver> driverClass) {
+    BrowserName(Class<? extends WebDriver> driverClass) {
         this.driverClass = driverClass;
     }
 
     public Class<? extends WebDriver> getDriverClass() {
         return driverClass;
+    }
+
+    public static BrowserName getByClass(Class<? extends WebDriver> driverClass) {
+        return Arrays.asList(BrowserName.values()).stream().filter(b -> b.getDriverClass().equals(driverClass)).findFirst().get();
     }
 }
