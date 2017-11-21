@@ -1,5 +1,6 @@
 package configuration;
 
+import context.ScenarioContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
@@ -11,7 +12,12 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScans({@ComponentScan("webdriver"), @ComponentScan("page")})
+@ComponentScans({
+        @ComponentScan("webdriver"),
+        @ComponentScan("page"),
+        @ComponentScan("configuration"),
+        @ComponentScan("actions"),
+        @ComponentScan("steps")})
 public class SpringConfig {
 
     @Bean(name = "driverProperties")
@@ -28,10 +34,15 @@ public class SpringConfig {
         return driverProperties;
     }
 
-    @Bean()
+    @Bean
     public PropertySourcesPlaceholderConfigurer webPropertiesPlaceholder() throws IOException {
         PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
         propertySourcesPlaceholderConfigurer.setLocation(new ClassPathResource("properties/web.properties"));
         return propertySourcesPlaceholderConfigurer;
+    }
+
+    @Bean
+    public ScenarioContext scenarioContext() {
+        return new ScenarioContext();
     }
 }

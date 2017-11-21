@@ -8,4 +8,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Locator {
+
+    String name();
+
+    String id() default "";
+
+    String xpath() default "/";
 }
