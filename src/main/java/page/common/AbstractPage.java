@@ -2,19 +2,41 @@ package page.common;
 
 import webdriver.Browser;
 
-public abstract class AbstractPage {
+public abstract class AbstractPage implements Page {
 
-    Browser browser;
+    private Browser browser;
+    private String url;
+    private String pageName;
 
     public AbstractPage(Browser browser) {
         this.browser = browser;
     }
 
     public String getPageName() {
-        return this.getClass().getDeclaredAnnotation(Page.class).name();
+        return this.pageName;
     }
 
-    public String getPageURL() {
-        return this.getClass().getDeclaredAnnotation(Page.class).url();
+    public String getUrl() {
+        return this.url;
+    }
+
+    @Override
+    public void open() {
+        browser.get(url);
+    }
+
+    @Override
+    public void refresh() {
+        browser.navigate().refresh();
+    }
+
+    @Override
+    public String getPageTitle() {
+        return browser.getTitle();
+    }
+
+    @Override
+    public Boolean isCurrentPage() {
+        return browser.getCurrentUrl().startsWith(url);
     }
 }
