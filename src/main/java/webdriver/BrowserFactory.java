@@ -4,7 +4,7 @@ import common.error.ATFException;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import webdriver.fixtures.BrowserName;
+import webdriver.fixture.BrowserName;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
@@ -38,6 +38,6 @@ public class BrowserFactory {
     }
 
     public Browser getBrowser(BrowserName browserName) throws ATFException {
-        WebDriver driver = getDriverForBrowser(browserName.getDriverClass());
+        return new Browser(browserName, getDriverForBrowser(browserName.getDriverClass()));
     }
 }
