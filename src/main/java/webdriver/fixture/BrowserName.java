@@ -1,4 +1,4 @@
-package webdriver.fixtures;
+package webdriver.fixture;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
