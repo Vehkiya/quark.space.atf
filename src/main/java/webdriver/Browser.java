@@ -3,7 +3,6 @@ package webdriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import page.common.AbstractPage;
 import webdriver.fixture.BrowserName;
 
 import java.util.List;
@@ -12,11 +11,12 @@ import java.util.Set;
 public class Browser implements WebDriver {
     private BrowserName browserName;
     private WebDriver webDriver;
-    private String baseUrl = "https://fentury.com/";
+    private String baseUrl = "";
 
-    public Browser(BrowserName browserName, WebDriver webDriver) {
+    public Browser(BrowserName browserName, WebDriver webDriver, String baseUrl) {
         this.browserName = browserName;
         this.webDriver = webDriver;
+        this.baseUrl = baseUrl;
     }
 
     @Override
@@ -86,17 +86,5 @@ public class Browser implements WebDriver {
 
     public BrowserName getBrowserName() {
         return browserName;
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
-    public void getPage(AbstractPage page) {
-        get(page.getPageURL());
     }
 }
