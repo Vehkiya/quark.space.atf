@@ -1,19 +1,15 @@
 package context;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import webdriver.Browser;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 @Service
 public class ScenarioContext {
 
-    @Autowired
-    @Qualifier("webProperties")
-    Properties webProperties;
+    private Browser browser;
 
     private Map<DataKey, Object> data = new HashMap<>();
 
@@ -31,5 +27,17 @@ public class ScenarioContext {
 
     public void save(DataKey dataKey, Object object) {
         data.put(dataKey, object);
+    }
+
+    public void resetResource() {
+        data.clear();
+    }
+
+    public Browser getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(Browser browser) {
+        this.browser = browser;
     }
 }

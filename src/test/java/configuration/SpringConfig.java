@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScans({
-        @ComponentScan("webdriver"),
-        @ComponentScan("page"),
-        @ComponentScan("configuration"),
-        @ComponentScan("actions"),
-        @ComponentScan("steps")})
+@ComponentScans({@ComponentScan("webdriver"),
+                 @ComponentScan("page"),
+                 @ComponentScan("configuration"),
+                 @ComponentScan("actions"),
+                 @ComponentScan("steps"),
+                 @ComponentScan("hooks")})
 public class SpringConfig {
 
     @Bean(name = "driverProperties")
