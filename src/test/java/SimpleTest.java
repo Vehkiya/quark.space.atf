@@ -8,11 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import page.factory.PageFactory;
-import webdriver.Browser;
 import webdriver.BrowserFactory;
-
-import static context.DataKey.BROWSER;
-import static webdriver.fixture.BrowserName.FIREFOX;
+import webdriver.fixture.BrowserName;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {SpringConfig.class})
@@ -32,12 +29,7 @@ public class SimpleTest {
 
     @Test
     public void verifyShit() throws ATFException {
-        Browser browser = browserFactory.getBrowser(FIREFOX);
-//        AbstractPage page = new BasicPage(browser);
-//        pageFactory.scanPage(BasicPage.class);
-        scenarioContext.save(BROWSER, browser);
-
-
+        browserFactory.getBrowser(BrowserName.CHROME);
         System.out.println("");
 
     }
