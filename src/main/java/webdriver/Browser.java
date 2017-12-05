@@ -8,79 +8,66 @@ import webdriver.fixture.BrowserName;
 import java.util.List;
 import java.util.Set;
 
-public class Browser implements WebDriver {
+public class Browser {
     private BrowserName browserName;
     private WebDriver webDriver;
-    private String baseUrl = "";
+    private String baseUrl;
 
-    public Browser(BrowserName browserName, WebDriver webDriver, String baseUrl) {
+    Browser(BrowserName browserName, WebDriver webDriver, String baseUrl) {
         this.browserName = browserName;
         this.webDriver = webDriver;
         this.baseUrl = baseUrl;
     }
 
-    @Override
     public void get(String s) {
         webDriver.get(baseUrl + s);
     }
 
-    @Override
     public String getCurrentUrl() {
         return webDriver.getCurrentUrl();
     }
 
-    @Override
     public String getTitle() {
         return webDriver.getTitle();
     }
 
-    @Override
     public List<WebElement> findElements(By by) {
         return webDriver.findElements(by);
     }
 
-    @Override
     public WebElement findElement(By by) {
         return webDriver.findElement(by);
     }
 
-    @Override
     public String getPageSource() {
         return webDriver.getPageSource();
     }
 
-    @Override
     public void close() {
         webDriver.close();
     }
 
-    @Override
     public void quit() {
         webDriver.quit();
     }
 
-    @Override
     public Set<String> getWindowHandles() {
         return null;
     }
 
-    @Override
     public String getWindowHandle() {
         return webDriver.getWindowHandle();
     }
 
-    @Override
-    public TargetLocator switchTo() {
+    public WebDriver.TargetLocator switchTo() {
         return webDriver.switchTo();
     }
 
-    @Override
-    public Navigation navigate() {
+    public WebDriver.Navigation navigate() {
         return webDriver.navigate();
     }
 
-    @Override
-    public Options manage() {
+    public WebDriver.Options manage() {
         return webDriver.manage();
     }
 
