@@ -13,6 +13,8 @@ public class ScenarioContext {
 
     private Map<DataKey, Object> data = new HashMap<>();
 
+    private String currentEvidencePath;
+
     public Map<DataKey, Object> getData() {
         return data;
     }
@@ -39,5 +41,13 @@ public class ScenarioContext {
 
     public void setBrowser(Browser browser) {
         this.browser = browser;
+    }
+
+    public String getCurrentEvidencePath() {
+        return currentEvidencePath;
+    }
+
+    public void setCurrentEvidencePath(final String currentEvidencePath) {
+        this.currentEvidencePath = currentEvidencePath;
     }
 }
