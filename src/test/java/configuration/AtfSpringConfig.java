@@ -1,5 +1,6 @@
 package configuration;
 
+import common.error.ATFException;
 import context.ScenarioContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -7,6 +8,9 @@ import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
+import webdriver.Browser;
+import webdriver.BrowserFactory;
+import webdriver.fixture.BrowserName;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -18,7 +22,7 @@ import java.util.Properties;
                  @ComponentScan("actions"),
                  @ComponentScan("steps"),
                  @ComponentScan("hooks")})
-public class SpringConfig {
+public class AtfSpringConfig {
 
     @Bean(name = "driverProperties")
     public Properties driverProperties() throws IOException {
@@ -44,5 +48,15 @@ public class SpringConfig {
     @Bean
     public ScenarioContext scenarioContext() {
         return new ScenarioContext();
+    }
+
+    @Bean
+    public BrowserFactory browserFactory() throws IOException {
+        return new BrowserFactory(driverProperties());
+    }
+
+    @Bean
+    public Browser browser() throws IOException, ATFException {
+        return browserFactory().getBrowser(BrowserName.getByDescription(webProperties().getProperty("active.browser")));
     }
 }

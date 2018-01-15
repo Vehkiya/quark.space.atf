@@ -1,4 +1,4 @@
-package page.common;
+package page.common.pages;
 
 import webdriver.Browser;
 
@@ -7,10 +7,6 @@ public abstract class AbstractPage implements Page {
     private Browser browser;
     private String url;
     private String pageName;
-
-    public AbstractPage(Browser browser) {
-        this.browser = browser;
-    }
 
     public String getPageName() {
         return this.pageName;
@@ -38,5 +34,24 @@ public abstract class AbstractPage implements Page {
     @Override
     public Boolean isCurrentPage() {
         return browser.getCurrentUrl().startsWith(url);
+    }
+
+    public Browser getBrowser() {
+        return browser;
+    }
+
+    public AbstractPage setBrowser(final Browser browser) {
+        this.browser = browser;
+        return this;
+    }
+
+    public AbstractPage setUrl(final String url) {
+        this.url = url;
+        return this;
+    }
+
+    public AbstractPage setPageName(final String pageName) {
+        this.pageName = pageName;
+        return this;
     }
 }

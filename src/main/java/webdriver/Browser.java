@@ -74,4 +74,8 @@ public class Browser {
     public BrowserName getBrowserName() {
         return browserName;
     }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
 }

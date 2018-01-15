@@ -9,7 +9,7 @@
 
     <!--<import resource="classpath*:/applicationContext.xml"/>-->
 
-    <bean class="configuration.SpringConfig"/>
+    <bean class="configuration.AtfSpringConfig"/>
 
     <bean class="org.springframework.context.annotation.ConfigurationClassPostProcessor"/>
 

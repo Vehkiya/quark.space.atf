@@ -1,6 +1,5 @@
 package hooks;
 
-import common.error.ATFException;
 import common.logs.LoggerFactory;
 import context.ScenarioContext;
 import cucumber.api.Scenario;
@@ -12,8 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import webdriver.Browser;
-import webdriver.BrowserFactory;
-import webdriver.fixture.BrowserName;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,18 +21,15 @@ import static java.io.File.separator;
 public class Hooks {
 
     @Autowired
-    private ScenarioContext scenarioContext;
+    private Browser browser;
 
-    @Value("${active.browser}")
-    private String activeBrowserSet;
+    @Autowired
+    private ScenarioContext scenarioContext;
 
     @Value("${find.on.page.timeout}")
     private Long defaultFindTimeout;
 
     private Logger logger = LoggerFactory.getLogger(Hooks.class);
-
-    @Autowired
-    private BrowserFactory browserFactory;
 
     @Before(order = 0)
     public void prepareScenario(Scenario scenario) throws Exception {
@@ -50,22 +44,13 @@ public class Hooks {
 
     @Before(order = 1)
     public void setUp() throws Exception {
-        BrowserName name = BrowserName.getByDescription(activeBrowserSet);
-        if (name == null) {
-            throw new ATFException("Invalid browser");
-        }
-        logger.info("shit");
-        Browser browser = browserFactory.getBrowser(name);
         browser.manage().timeouts().pageLoadTimeout(defaultFindTimeout, TimeUnit.SECONDS);
         browser.manage().window().maximize();
-        scenarioContext.setBrowser(browser);
     }
 
     @After
     public void tearDown() throws Exception {
-        if (scenarioContext.getBrowser() != null) {
-            scenarioContext.getBrowser().close();
-        }
+        browser.close();
         scenarioContext.resetResource();
     }
 }

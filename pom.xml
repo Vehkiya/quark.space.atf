@@ -6,6 +6,7 @@
 
     <groupId>quark.space</groupId>
     <artifactId>atf</artifactId>
+    <packaging>pom</packaging>
     <version>0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -19,6 +20,9 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>tests</module>
+    </modules>
 
     <properties>
         <spring.version>5.0.2.RELEASE</spring.version>
@@ -67,9 +71,15 @@
 
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
+            <artifactId>hamcrest-all</artifactId>
             <version>1.3</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.detro.ghostdriver</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>

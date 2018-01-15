@@ -9,14 +9,4 @@ public class BrowserActions {
 
     @Autowired
     private ScenarioContext scenarioContext;
-
-    private String something = "poop";
-
-    public ScenarioContext getScenarioContext() {
-        return scenarioContext;
-    }
-
-    public String getSomething() {
-        return something;
-    }
 }

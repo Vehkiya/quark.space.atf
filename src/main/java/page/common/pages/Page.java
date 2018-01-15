@@ -1,4 +1,4 @@
-package page.common;
+package page.common.pages;
 
 public interface Page {
 

@@ -1,4 +1,4 @@
-package page.common;
+package page.common.pages;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

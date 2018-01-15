@@ -1,15 +1,12 @@
 package context;
 
 import org.springframework.stereotype.Service;
-import webdriver.Browser;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class ScenarioContext {
-
-    private Browser browser;
 
     private Map<DataKey, Object> data = new HashMap<>();
 
@@ -33,14 +30,6 @@ public class ScenarioContext {
 
     public void resetResource() {
         data.clear();
-    }
-
-    public Browser getBrowser() {
-        return browser;
-    }
-
-    public void setBrowser(Browser browser) {
-        this.browser = browser;
     }
 
     public String getCurrentEvidencePath() {

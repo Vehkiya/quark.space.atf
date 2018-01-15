@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.Arrays;
@@ -15,7 +16,8 @@ public enum BrowserName {
     FIREFOX(FirefoxDriver.class, "firefox"),
     IE(InternetExplorerDriver.class, "ie"),
     EDGE(EdgeDriver.class, "edge"),
-    SAFARI(SafariDriver.class, "safari");
+    SAFARI(SafariDriver.class, "safari"),
+    HEADLESS(PhantomJSDriver.class, "headless");
 
     Class<? extends WebDriver> driverClass;
     String description;
@@ -30,12 +32,12 @@ public enum BrowserName {
     }
 
     public static BrowserName getByClass(Class<? extends WebDriver> driverClass) {
-        return Arrays.asList(BrowserName.values()).stream().filter(b -> b.getDriverClass().equals(driverClass)).findFirst().get();
+        return Arrays.stream(BrowserName.values()).filter(b -> b.getDriverClass().equals(driverClass)).findFirst().orElse(null);
     }
 
     public static BrowserName getByDescription(String description) {
         Optional<BrowserName> browserName = Arrays.stream(BrowserName.values())
-                .filter(bn -> bn.description.equalsIgnoreCase(description.trim())).findFirst();
+                                                  .filter(bn -> bn.description.equalsIgnoreCase(description.trim())).findFirst();
         return browserName.orElse(null);
     }
 }
