@@ -19,10 +19,10 @@ public enum BrowserName {
     SAFARI(SafariDriver.class, "safari"),
     HEADLESS(PhantomJSDriver.class, "headless");
 
-    Class<? extends WebDriver> driverClass;
-    String description;
+    private Class<? extends WebDriver> driverClass;
+    private String description;
 
-    BrowserName(Class<? extends WebDriver> driverClass, String description) {
+    BrowserName(final Class<? extends WebDriver> driverClass, final String description) {
         this.driverClass = driverClass;
         this.description = description;
     }
@@ -31,8 +31,8 @@ public enum BrowserName {
         return driverClass;
     }
 
-    public static BrowserName getByClass(Class<? extends WebDriver> driverClass) {
-        return Arrays.stream(BrowserName.values()).filter(b -> b.getDriverClass().equals(driverClass)).findFirst().orElse(null);
+    public String getDescription() {
+        return description;
     }
 
     public static BrowserName getByDescription(String description) {

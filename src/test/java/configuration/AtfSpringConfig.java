@@ -2,6 +2,10 @@ package configuration;
 
 import common.error.ATFException;
 import context.ScenarioContext;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
@@ -57,6 +61,14 @@ public class AtfSpringConfig {
 
     @Bean
     public Browser browser() throws IOException, ATFException {
-        return browserFactory().getBrowser(BrowserName.getByDescription(webProperties().getProperty("active.browser")));
+//        return browserFactory().getBrowser(BrowserName.getByDescription(webProperties().getProperty("active.browser")));
+
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities().phantomjs();
+        desiredCapabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                                          driverProperties().getProperty("phantomjs.binary.path"));
+
+        WebDriver webDriver = new PhantomJSDriver(desiredCapabilities);
+
+        return new Browser(BrowserName.HEADLESS, webDriver);
     }
 }

@@ -11,16 +11,14 @@ import java.util.Set;
 public class Browser {
     private BrowserName browserName;
     private WebDriver webDriver;
-    private String baseUrl;
 
-    Browser(BrowserName browserName, WebDriver webDriver, String baseUrl) {
+    public Browser(BrowserName browserName, WebDriver webDriver) {
         this.browserName = browserName;
         this.webDriver = webDriver;
-        this.baseUrl = baseUrl;
     }
 
     public void get(String s) {
-        webDriver.get(baseUrl + s);
+        webDriver.get(s);
     }
 
     public String getCurrentUrl() {
@@ -73,9 +71,5 @@ public class Browser {
 
     public BrowserName getBrowserName() {
         return browserName;
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
     }
 }
